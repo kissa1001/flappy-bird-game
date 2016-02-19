@@ -28,8 +28,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['jshint']);
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch('js/**/*.js', ['jshint','scripts']);
+    gulp.watch('scss/*.scss', ['sass','styles']);
 });
 
 // Default task
