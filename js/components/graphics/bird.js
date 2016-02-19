@@ -4,7 +4,18 @@ var BirdGraphicsComponent = function(entity) {
 };
 
 BirdGraphicsComponent.prototype.draw = function(context) {
-    context.drawImage(this.image, 0, 0);
+    var position = this.entity.components.physics.position;
+
+    context.save();
+    
+    context.translate(position.x, position.y);
+    context.rotate(Math.PI);
+    context.scale(-1, 1);
+
+    var image = this.image;
+
+    context.drawImage(this.image, -settings.birdRadius, -settings.birdRadius, settings.birdRadius*2, settings.birdRadius*2);
+    context.restore();
 };
 
 exports.BirdGraphicsComponent = BirdGraphicsComponent;

@@ -19,10 +19,12 @@ GraphicsSystem.prototype.tick = function() {
         this.canvas.height = this.canvas.offsetHeight;
     }
 
-    // Clear the canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Rendering goes here
+    this.context.save();
+    this.context.translate(this.canvas.width / 2, this.canvas.height);
+    this.context.scale(this.canvas.height, -this.canvas.height);
+
     for (var i=0; i<this.entities.length; i++) {
         var entity = this.entities[i];
         if (!'graphics' in entity.components) {
@@ -31,7 +33,9 @@ GraphicsSystem.prototype.tick = function() {
 
         entity.components.graphics.draw(this.context);
     }
-    // Continue the render loop
+
+    this.context.restore();
+
     window.requestAnimationFrame(this.tick.bind(this));
 };
 
