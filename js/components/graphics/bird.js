@@ -14,7 +14,7 @@ BirdGraphicsComponent.prototype.draw = function(context) {
 
     var image = this.image;
 
-    context.drawImage(this.image, -settings.birdRadius, -settings.birdRadius, settings.birdRadius*2, settings.birdRadius*2);
+    context.drawImage(this.image, 0.03, 0.03, 0.03*2, 0.03*2);
     context.restore();
 };
 
