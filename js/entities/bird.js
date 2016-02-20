@@ -7,18 +7,15 @@ var bottomEdge = require('./bottomEdge');
 var settings = require('../../settings');
 
 var Bird = function(game) {
-    
     this.isBird = true;
     this.isPipe_Check = false;
     this.game = game;
     var physics = new physicsComponent.PhysicsComponent(this);
     physics.position.y = 0.5;
     physics.acceleration.y = -2;
-
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
     var collision = new collisionComponent.CircleCollisionComponent(this, settings.birdRadius);
     collision.onCollision = this.onCollision.bind(this);
-
     this.components = {
         physics: physics,
         graphics: graphics,
@@ -27,16 +24,13 @@ var Bird = function(game) {
 };
 
 Bird.prototype.onCollision = function(entity, entities) {
-
     if (!entity.isPipe_Check) {
             entities.length = 0;
             entities.push(new Bird(this.game), new leftEdge.LeftEdge(), new topEdge.TopEdge(), new bottomEdge.BottomEdge()); 
-            
             this.game.gameOver();
             document.getElementById('lastGameScore').innerText = this.game.pipe.score;
             document.getElementById('pipeCount').innerText = 0;
             localStorage.setItem('lastGameScore', this.game.pipe.score);
-
             var highScore = this.game.pipe.highScore;
             if (this.game.pipe.score > highScore) {
                 highScore = this.game.pipe.score;
