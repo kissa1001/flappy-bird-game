@@ -34,13 +34,10 @@ FlappyBird.prototype.pause = function() {
         this.physics.pause();
         this.garbage.pause();
         document.getElementById('scoreboard').removeAttribute('style');
-
         document.getElementById('startBtn').setAttribute("style", "display:none;");
         document.getElementById('pauseBtn').removeAttribute("style");
-
         document.getElementById('startEndHeading').setAttribute("style", "display:none;");
         document.getElementById('pauseUnpauseHeading').removeAttribute("style");
-
     } else {
         this.physics.run();
         this.garbage.run();
@@ -53,42 +50,22 @@ FlappyBird.prototype.gameOver = function() {
     if (!this.gameEnded) {
         this.physics.gameOver();
         this.garbage.gameOver();
-
         document.getElementById('startEndHeading').innerText = "Game Over";
-        
-
-        this.interval = window.setInterval(countdownTick.bind(this), 1000);
-
+        document.getElementById("startBtn").innerText = "Opps!Try again";
         document.getElementById('scoreboard').removeAttribute('style');
         document.getElementById('startBtn').removeAttribute("style");
         document.getElementById('pauseBtn').setAttribute("style", "display:none;");
         document.getElementById('startEndHeading').removeAttribute("style");
         document.getElementById('pauseUnpauseHeading').setAttribute("style", "display:none;");
-
         this.gameEnded = !this.gameEnded;
-
     } else {
-        if (document.getElementById("startBtn").innerText == "Start Flying!") {
+        if (document.getElementById("startBtn").innerText == "Click to Start" || "Opps!Try again") {
             this.physics.run();
             this.garbage.run();
             document.getElementById('scoreboard').setAttribute("style", "display:none;");
             this.gameEnded = !this.gameEnded;
         }
     }  
-};
-
-var countdownTick = function() {
-    var num = document.getElementById('startBtn').innerHTML;
-    
-    if (num >= 1) {
-        num--;
-    }
-    document.getElementById('startBtn').innerHTML = num;
-
-    if (num === 0) {
-        clearInterval(this.interval);
-        document.getElementById('startBtn').innerHTML = "Start Flying!";
-    }
 };
 
 exports.FlappyBird = FlappyBird;
