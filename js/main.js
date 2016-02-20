@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	var app = new flappyBird.FlappyBird();
 	app.run();
 	app.gameOver();
+	document.getElementById('startEndHeading').innerText = "Flappy Mario";
+	document.getElementById('startBtn').innerHTML = "Click to Start" ;
 
 	$("#startBtn").mouseenter(function(){
 		$(this).velocity( { translateY: "-10px", backgroundColor: "#FF7376" }, 400 );
