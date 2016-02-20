@@ -1,4 +1,4 @@
-var GraphicsSystem = function(entities) {
+var GraphicsSystem = function(entities, game) {
     this.entities = entities;
     // Canvas is where we draw
     this.canvas = document.getElementById('main-canvas');
@@ -19,15 +19,17 @@ GraphicsSystem.prototype.tick = function() {
         this.canvas.height = this.canvas.offsetHeight;
     }
 
+    // Clear the canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.context.save();
     this.context.translate(this.canvas.width / 2, this.canvas.height);
     this.context.scale(this.canvas.height, -this.canvas.height);
 
+    // Rendering goes here
     for (var i=0; i<this.entities.length; i++) {
         var entity = this.entities[i];
-        if (!'graphics' in entity.components) {
+        if (!entity.components.graphics) {
             continue;
         }
 
@@ -35,7 +37,8 @@ GraphicsSystem.prototype.tick = function() {
     }
 
     this.context.restore();
-
+    
+    // Continue the render loop
     window.requestAnimationFrame(this.tick.bind(this));
 };
 

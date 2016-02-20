@@ -46,7 +46,7 @@ gulp.task('html', function() {
 gulp.task('scripts', function() {
     return browserify('js/main.js')
     .bundle()
-    .pipe(source('app.js'))
+    .pipe(source('main.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest('build/js'));
@@ -67,4 +67,4 @@ gulp.task('images', function() {
 });
 
 // Build task
-gulp.task('build', ['jshint', 'sass', 'html', 'scripts', 'styles', 'images']);
+gulp.task('build', ['jshint', 'html', 'sass', 'scripts', 'styles', 'images']);

@@ -3,28 +3,26 @@ var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/rect");
 var settings = require('../../settings');
 
-var Pipe = function(y_coord, flip) {
+var Pipe_Checkpoint = function() {
     this.isBird = false;
-    this.isPipe_Check = false;
-    this.flip = flip;
+    this.isPipe_Check = true;
+    this.hasScored = false;
 	var physics = new physicsComponent.PhysicsComponent(this);
 	physics.position.x = 0.5;
-	physics.position.y = y_coord;
-	physics.velocity.x = -0.3; 
+	physics.position.y = 0.5;
+	physics.velocity.x = -0.3;
     
-    var graphics = new graphicsComponent.PipeGraphicsComponent(this);
-    var collision = new collisionComponent.RectCollisionComponent(this, {x: settings.pipeWidth, y: settings.pipeHeight});
+    var collision = new collisionComponent.RectCollisionComponent(this, {x: settings.pipeWidth, y: 1});
     collision.onCollision = this.onCollision.bind(this);
     
     this.components = {
         physics: physics,
-        graphics: graphics,
         collision: collision
     };
 };
 
-Pipe.prototype.onCollision = function(entity) {
-    //console.log("Pipe collided with entity:", entity);
+Pipe_Checkpoint.prototype.onCollision = function(entity) {
+    //console.log("Pipe_Checkpoint collided with entity:", entity);
 };
 
-exports.Pipe = Pipe;
+exports.Pipe_Checkpoint = Pipe_Checkpoint;
