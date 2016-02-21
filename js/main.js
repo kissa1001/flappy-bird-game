@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	app.run();
 	app.gameOver();
 	document.getElementById('startEndHeading').innerText = "Flappy Mario";
-	document.getElementById('startBtn').innerHTML = "Click to Start" ;
+	var startMsg = 'Click to start ' + '<i class="fa fa-play"></i>';
+	document.getElementById('startBtn').innerHTML = startMsg ;
 
 	$("#startBtn").mouseenter(function(){
 		$(this).velocity( { translateY: "-10px", backgroundColor: "#FF7376" }, 400 );
