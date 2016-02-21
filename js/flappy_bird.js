@@ -45,13 +45,16 @@ FlappyBird.prototype.pause = function() {
     }
     this.paused = !this.paused;
 };
+var gameOverMsg = 'Game Over';
+var tryAgainMsg = 'Oops! Try Again';
+var startMsg = 'Click to start ' + '<i class="fa fa-play"></i>';
 
 FlappyBird.prototype.gameOver = function() {
     if (!this.gameEnded) {
         this.physics.gameOver();
         this.garbage.gameOver();
-        document.getElementById('startEndHeading').innerText = "Game Over";
-        document.getElementById("startBtn").innerText = "Opps!Try again";
+        document.getElementById('startEndHeading').innerText = gameOverMsg;
+        document.getElementById("startBtn").innerText = tryAgainMsg;
         document.getElementById('scoreboard').removeAttribute('style');
         document.getElementById('startBtn').removeAttribute("style");
         document.getElementById('pauseBtn').setAttribute("style", "display:none;");
@@ -59,7 +62,7 @@ FlappyBird.prototype.gameOver = function() {
         document.getElementById('pauseUnpauseHeading').setAttribute("style", "display:none;");
         this.gameEnded = !this.gameEnded;
     } else {
-        if (document.getElementById("startBtn").innerText == "Click to Start" || "Opps!Try again") {
+        if (document.getElementById("startBtn").innerText == startMsg || tryAgainMsg) {
             this.physics.run();
             this.garbage.run();
             document.getElementById('scoreboard').setAttribute("style", "display:none;");
